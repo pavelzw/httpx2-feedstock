@@ -123,7 +123,10 @@ outputs:
             - ${{ python_check_max }}.*
       - requirements:
           run:
-            - httpx2[extras=cli]
+            # - httpx2[extras=cli]
+            - click >=8.4.2
+            - pygments 2.*
+            - rich >=10,<16
         script:
           env:
             PYTHONIOENCODING: utf-8
