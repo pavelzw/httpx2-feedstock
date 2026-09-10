@@ -38,8 +38,8 @@ outputs:
         - python ${{ python_min }}.*
         - uv-dynamic-versioning >=0.14.1
       run:
-        - python >=${{ python_min }}
         - h11 >=0.16
+        - python >=${{ python_min }}
         - truststore >=0.10
       extras:
         http2:
@@ -73,17 +73,17 @@ outputs:
           - httpx2 = httpx2:main
     requirements:
       host:
-        - hatchling
         - hatch-fancy-pypi-readme
+        - hatchling
         - pip
         - python ${{ python_min }}.*
         - uv-dynamic-versioning >=0.14.1
       run:
-        - python >=${{ python_min }}
-        - truststore >=0.10
         - ${{ pin_subpackage("httpcore2", exact=true) }}
         - anyio >=4.10
         - idna >=3.18
+        - python >=${{ python_min }}
+        - truststore >=0.10
         - typing_extensions >=4.5.0
       extras:
         brotli:
