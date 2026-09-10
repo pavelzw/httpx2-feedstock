@@ -208,4 +208,5 @@ Feedstock Maintainers
 
 * [@Kludex](https://github.com/Kludex/)
 * [@bollwyvl](https://github.com/bollwyvl/)
+* [@pavelzw](https://github.com/pavelzw/)
 
