@@ -123,6 +123,7 @@ outputs:
             - ${{ python_check_max }}.*
       - requirements:
           run:
+            # https://github.com/prefix-dev/rattler-build/pull/2813
             # - httpx2[extras=cli]
             - click >=8.4.2
             - pygments 2.*
