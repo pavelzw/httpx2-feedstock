@@ -19,7 +19,7 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 2
 
 outputs:
   - package:
@@ -36,16 +36,25 @@ outputs:
         - hatchling
         - pip
         - python ${{ python_min }}.*
-        - uv-dynamic-versioning >=0.14.0
+        - uv-dynamic-versioning >=0.14.1
       run:
-        - h11 >=0.16
         - python >=${{ python_min }}
+        - h11 >=0.16
         - truststore >=0.10
       run_constraints:
-        - anyio >=4.5.0,<5.0
         - h2 >=3,<5
         - socksio 1.*
         - trio >=0.22.0,<1.0
+        - anyio >=4.5.0,<5.0
+      extras:
+        http2:
+          - h2 >=3,<5
+        socks:
+          - socksio 1.*
+        trio:
+          - trio >=0.22.0,<1.0
+        anyio:
+          - anyio >=4.5.0,<5.0
     tests:
       - python:
           imports: httpcore2
@@ -69,26 +78,42 @@ outputs:
           - httpx2 = httpx2:main
     requirements:
       host:
-        - hatch-fancy-pypi-readme
         - hatchling
+        - hatch-fancy-pypi-readme
         - pip
         - python ${{ python_min }}.*
-        - uv-dynamic-versioning >=0.8.0
+        - uv-dynamic-versioning >=0.14.1
       run:
-        - ${{ pin_subpackage("httpcore2", exact=True) }}
-        - anyio
-        - idna >=3.18
         - python >=${{ python_min }}
         - truststore >=0.10
+        - ${{ pin_subpackage("httpcore2", exact=true) }}
+        - anyio >=4.10
+        - idna >=3.18
         - typing_extensions >=4.5.0
       run_constraints:
-        - backports.zstd >=1.0.0
-        - click >=8.4
+        - brotli-python >=1.2.0
+        - click >=8.4.2
         - pygments 2.*
         - rich >=10,<16
         - h2 >=3,<5
         - socksio 1.*
         - wsproto >=1.2
+        - backports.zstd >=1.0.0
+      extras:
+        brotli:
+          - brotli-python >=1.2.0
+        cli:
+          - click >=8.4.2
+          - pygments 2.*
+          - rich >=10,<16
+        http2:
+          - h2 >=3,<5
+        socks:
+          - socksio 1.*
+        ws:
+          - wsproto >=1.2
+        zstd:
+          - backports.zstd >=1.0.0
     tests:
       - python:
           imports: httpx2
@@ -98,10 +123,7 @@ outputs:
             - ${{ python_check_max }}.*
       - requirements:
           run:
-            - click >=8.4
-            - python ${{ python_min }}.*
-            - pygments 2.*
-            - rich >=10,<16
+            - httpx2[extras=cli]
         script:
           env:
             PYTHONIOENCODING: utf-8
@@ -121,3 +143,4 @@ extra:
   recipe-maintainers:
     - bollwyvl
     - Kludex
+    - pavelzw
